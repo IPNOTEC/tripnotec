@@ -271,7 +271,7 @@ fz-f{display:block;height:100%;border-radius:3px;background:var(--mc);box-shadow
 fz-n{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:6px;font:600 11px var(--d);letter-spacing:.08em;color:#e8e8e8}
 fz-v{font-weight:900;color:var(--mc)}
 fz-s{padding:2px 7px;border-radius:3px;font-size:9px;font-weight:900;letter-spacing:.14em;color:#000;white-space:nowrap}
-fz-w.k-ff fz-s{background:#ffb800;box-shadow:0 0 12px #ffb800;animation:fzp .9s ease-in-out infinite alternate}
+fz-w.k-ff fz-s{background:#ffb800;box-shadow:0 0 12px #ffb800;animation:fzp .9s ease-in-out infinite alternate!important}
 fz-w.k-so fz-s{background:#ff2d3d;color:#fff;box-shadow:0 0 12px #ff2d3d}
 fz-w.k-so fz-f{background:#ff2d3d;box-shadow:0 0 10px #ff2d3d}fz-w.k-so fz-v{color:#ff2d3d}
 fz-w.big fz-bar{height:8px}fz-w.big fz-n{font-size:13px;margin-top:8px}fz-w.big fz-s{font-size:10px}
@@ -279,7 +279,8 @@ fz-w.big fz-bar{height:8px}fz-w.big fz-n{font-size:13px;margin-top:8px}fz-w.big 
 .sob small{display:block;margin-top:4px;font:500 11.5px var(--u);letter-spacing:0;color:#ddd;text-shadow:none}
 @media(max-width:900px){.hero{position:relative}.vu{display:flex;position:absolute;left:3px;top:0;bottom:0;padding:14px 0;gap:3px;z-index:3;pointer-events:none}.vu i{width:6px}}
 @keyframes fzp{to{opacity:.45}}
-@media(prefers-reduced-motion:reduce){fz-w.k-ff fz-s{animation:none}}
+.tc:not(.on):not(:disabled):not(:hover){box-shadow:inset 0 2px 0 var(--c)}
+.mc button:not(.on):not(:disabled):not(:hover){box-shadow:inset 0 -2px 0 var(--c)}
 </style>
 </head>
 <body>
@@ -361,7 +362,7 @@ const API={
   contact:async d=>({id:'ENQ-'+Date.now().toString().slice(-6)})
 };
 /* ============ DATA ============ */
-const T=[['JAN','Genesis',124,138,'#ff2d3d'],['FEB','Pulse',126,140,'#ff8a00'],['MAR','Voltage',123,142,'#ffe600'],['APR','Circuit',126,144,'#a8ff00'],['MAY','Pressure',130,145,'#2bff3a'],['JUN','Signal',128,146,'#00ffa0'],['JUL','Heat',130,148,'#00f0ff'],['AUG','Peak',132,150,'#2d9bff'],['SEP','Return',126,146,'#5b6bff'],['OCT','Shadow',126,144,'#a64dff'],['NOV','Ritual',125,142,'#ff2bf0'],['DEC','Finale',124,150,'#ff2d8f']];
+const T=[['JAN','Genesis',124,138,'#ff2d3d'],['FEB','Pulse',126,140,'#00ffa0'],['MAR','Voltage',123,142,'#ff2bf0'],['APR','Circuit',126,144,'#a8ff00'],['MAY','Pressure',130,145,'#5b6bff'],['JUN','Signal',128,146,'#ff8a00'],['JUL','Heat',130,148,'#00f0ff'],['AUG','Peak',132,150,'#ff2d8f'],['SEP','Return',126,146,'#2bff3a'],['OCT','Shadow',126,144,'#a64dff'],['NOV','Ritual',125,142,'#ffe600'],['DEC','Finale',124,150,'#2d9bff']];
 const ST=[['Karnataka',['Bengaluru','Mysuru','Mangaluru']],['Maharashtra',['Mumbai','Pune','Nagpur']],['Delhi / NCR',['New Delhi','Gurugram','Noida']],['Goa',['Panaji','Calangute','Margao']],['Tamil Nadu',['Chennai','Coimbatore','Pondicherry']],['Telangana',['Hyderabad','Warangal','Secunderabad']],['Gujarat',['Ahmedabad','Surat','Vadodara']],['Rajasthan',['Jaipur','Udaipur','Jodhpur']],['West Bengal',['Kolkata','Siliguri','Durgapur']],['Punjab',['Chandigarh','Amritsar','Ludhiana']],['Himachal Pradesh',['Shimla','Manali','Dharamshala']]];
 /* DEV: 33 spaces, each capacity 1001. Replace placeholder names and SPOC numbers with real data. */
 const SP=ST.flatMap(([state,cs],si)=>cs.map((city,b)=>({id:si*3+b,si,state,city,name:si*3+b===0?'Sreeraga Resorts':city+' Space',spoc:'+91 90000 '+(10000+si*3+b)})));
@@ -547,7 +548,7 @@ function eq(){const W='TRIPNOTEC',cols=[];let t=0;
     [...el.children].forEach((c,i)=>{c.onclick=()=>c.classList.toggle('on');cols.push({i,s:[...c.lastChild.children],n:-1})})});
   return()=>{t+=.12;cols.forEach(o=>{const n=Math.round(lv(o.i,t)*7);if(n===o.n)return;o.n=n;o.s.forEach((x,j)=>{x.className=j>=7-n?(j===7-n?'p':'l'):''})})}}
 {const pv=vu(),pe=eq();let k=0,id;const step=()=>{if(k++%2===0)pv();pe()};step();
-  if(!matchMedia('(prefers-reduced-motion:reduce)').matches){id=setInterval(step,120);
+  {id=setInterval(step,120);
     document.addEventListener('visibilitychange',()=>{clearInterval(id);if(!document.hidden)id=setInterval(step,120)})}}
 knob($('#k1'));bindShare();who();render();
 </script>
